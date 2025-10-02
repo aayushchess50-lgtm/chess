@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Chess.com Giveaway Reel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #FFD700;
+            --dark-bg: #121212;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .reel-container {
+            width: 100%;
+            max-width: 380px;
+            aspect-ratio: 9 / 16;
+            background-image: url('https://images.unsplash.com/photo-1580541832626-2a7131ee809f?q=80&w=1287&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            border-radius: 24px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.7);
+            overflow: hidden;
+            position: relative;
+            border: 3px solid var(--gold);
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(18, 18, 18, 0.7) 0%, rgba(18, 18, 18, 0.9) 100%);
+            z-index: 1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            padding: 28px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            text-align: center;
+        }
+
+        /* --- Animation Keyframes --- */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% {
+                text-shadow: 0 0 8px var(--gold), 0 0 16px var(--gold), 0 0 24px transparent;
+            }
+            50% {
+                text-shadow: 0 0 16px var(--gold), 0 0 32px var(--gold), 0 0 48px var(--gold);
+            }
+        }
+        
+        /* --- Animation Classes --- */
+        .anim-element {
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+
+        /* --- Hook Elements (0 - 2s) --- */
+        #hook {
+            font-size: 2.8rem;
+            font-weight: 900;
+            line-height: 1.2;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            animation: popIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            animation-delay: 0.2s;
+        }
+        .highlight {
+            color: var(--gold);
+        }
+
+        /* --- Offer Elements (2s - 4.5s) --- */
+        #offer-wrapper {
+            animation: fadeIn 0.5s forwards;
+            animation-delay: 2s;
+        }
+        #offer-wrapper h1 {
+            font-size: 5.5rem;
+            font-weight: 900;
+            color: var(--gold);
+            line-height: 1;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            animation: popIn 0.6s forwards;
+            animation-delay: 2.2s;
+        }
+        #offer-wrapper h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            animation: slideUp 0.6s forwards;
+            animation-delay: 2.5s;
+        }
+         #offer-wrapper .trophy {
+            font-size: 4rem;
+            animation: popIn 0.5s forwards;
+            animation-delay: 3s;
+        }
+
+
+        /* --- How to Join (4.5s - 8.5s) --- */
+        #steps-wrapper {
+            animation: fadeIn 0.5s forwards;
+            animation-delay: 4.5s;
+        }
+        #steps-wrapper h3 {
+             font-size: 2.2rem;
+             font-weight: 900;
+             color: var(--gold);
+             animation: popIn 0.6s forwards;
+             animation-delay: 4.7s;
+        }
+        #steps-wrapper .step {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 10px 15px;
+            margin-top: 12px;
+            font-size: 1.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        #step1 { animation: slideUp 0.6s forwards; animation-delay: 5.2s; }
+        #step2 { animation: slideUp 0.6s forwards; animation-delay: 6.2s; }
+        
+
+        /* --- Guarantee (8.5s - 10.5s) --- */
+        #guarantee {
+            background: linear-gradient(45deg, #f0b90c, #f7d057);
+            color: #1a1a1a;
+            font-weight: 700;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 1.3rem;
+            animation: popIn 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+            animation-delay: 8.5s;
+        }
+        
+
+        /* --- Final CTA (10.5s onwards) --- */
+        #cta {
+            animation: fadeIn 0.5s forwards;
+            animation-delay: 10.5s;
+        }
+        #cta p {
+             font-size: 1.1rem;
+             animation: slideUp 0.6s forwards;
+             animation-delay: 10.7s;
+        }
+         #cta .final-text {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--gold);
+            animation: pulseGlow 2s infinite, popIn 0.6s forwards;
+            animation-delay: 11.2s, 11.2s;
+         }
+
+        /* Initially hide all scenes */
+        .scene {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 28px;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="reel-container">
+        <div class="overlay"></div>
+        <div class="content">
+
+            <!-- Scene 1: The HOOK (0s - 2s) -->
+            <div class="scene" style="animation-delay: 0s; animation: fadeIn 0.5s forwards, fadeOut 0.5s forwards 2s;">
+                <h1 id="hook" class="anim-element">Chess player ho?<br>Ye <span class="highlight">miss mat karna!</span></h1>
+            </div>
+
+            <!-- Scene 2: The OFFER (2s - 4.5s) -->
+            <div class="scene" style="animation-delay: 2s; animation: fadeIn 0.5s forwards, fadeOut 0.5s forwards 4.5s;">
+                <div id="offer-wrapper" class="anim-element flex flex-col items-center">
+                    <h1 class="anim-element">FREE</h1>
+                    <h2 class="anim-element">1-Month Premium</h2>
+                    <div class="trophy anim-element">🏆</div>
+                </div>
+            </div>
+            
+            <!-- Scene 3: How to Join (4.5s - 8.5s) -->
+            <div class="scene" style="animation-delay: 4.5s; animation: fadeIn 0.5s forwards, fadeOut 0.5s forwards 8.5s;">
+                 <div id="steps-wrapper" class="anim-element w-full">
+                     <h3 class="anim-element">Kaise Join Karein?</h3>
+                     <div id="step1" class="step anim-element">1️⃣ Page/<strong>@chesskeeda02 & <br> @chessmania960 </strong> ko FOLLOW karo</div>
+                     <div id="step2" class="step anim-element">2️⃣ Apna Username COMMENT karo ♟️</div>
+                 </div>
+            </div>
+
+            <!-- Scene 4: The GUARANTEE (8.5s - 10.5s) -->
+            <div class="scene" style="animation-delay: 8.5s; animation: fadeIn 0.5s forwards, fadeOut 0.5s forwards 10.5s;">
+                <div id="guarantee" class="anim-element">
+                    💡 Sabko Milega - 100% Guaranteed!
+                </div>
+            </div>
+
+            <!-- Scene 5: Final CTA (10.5s onwards) -->
+            <div class="scene" style="animation-delay: 10.5s;">
+                 <div id="cta" class="anim-element">
+                    <p class="anim-element">Unlimited Puzzles, Lessons & more!</p>
+                    <h3 class="final-text anim-element">JOIN NOW! ⚡️</h3>
+                 </div>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        // Simple script to make scenes appear and disappear
+        const scenes = document.querySelectorAll('.scene');
+        let currentScene = 0;
+        const sceneTimings = [2000, 2500, 4000, 2000, 5000]; // Duration for each scene in ms
+
+        function playScenes() {
+            if (currentScene >= scenes.length) {
+                // Optional: loop the animation
+                // scenes.forEach(s => s.style.opacity = 0);
+                // currentScene = 0;
+                // scenes[currentScene].style.opacity = 1;
+                return;
+            };
+
+            scenes.forEach((scene, index) => {
+                scene.style.display = 'none';
+                scene.style.opacity = '0';
+            });
+            
+            const activeScene = scenes[currentScene];
+            activeScene.style.display = 'flex';
+            
+            // This is a workaround because CSS fadeOut isn't a real thing
+            // We control visibility with JS, animations are pure CSS
+            setTimeout(() => {
+                activeScene.style.opacity = '1';
+            }, 50);
+
+            setTimeout(() => {
+                activeScene.style.opacity = '0';
+                 setTimeout(() => {
+                    currentScene++;
+                    playScenes();
+                }, 500); // Wait for fade out to complete
+            }, sceneTimings[currentScene]);
+        }
+        
+        // A little trick to restart animation on click for testing
+        document.querySelector('.reel-container').addEventListener('click', () => {
+             // This is complex to reset perfectly. For now, we will just reload.
+             // location.reload(); 
+        });
+        
+        // This is a CSS-only animation now, JS is not needed to play it.
+        // But I will leave a simplified JS logic for scene management if needed in future.
+        // For now, CSS animation-delay handles everything.
+        
+        // The new CSS logic uses a "scene" approach where each scene fades in and then fades out
+        // allowing the next one to appear. This is controlled by multiple animation properties.
+        // The fadeOut is simulated by adding a second animation property.
+        
+        // Corrected CSS to handle fadeOut simulation:
+        const style = document.createElement('style');
+        style.innerHTML = `@keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }`;
+        document.head.appendChild(style);
+
+
+    </script>
+</body>
+</html>
